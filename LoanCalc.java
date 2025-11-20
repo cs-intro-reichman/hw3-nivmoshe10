@@ -21,7 +21,9 @@ public class LoanCalc {
 
 	System.out.print("\nPeriodical payment, using bi-section search: ");
 	System.out.println((int) bisectionSolver(loan, rate, n, epsilon));
-	System.out.println("number of iterations: " + iterationCounter);
+	System.out.println("number of iterations: " + iterationCounter); 
+	}
+
 	// Computes the ending balance of a loan, given the loan amount, the periodical
 	// interest rate (as a percentage), the number of periods (n), and the periodical payment.
 	private static double endBalance(double loan, double rate, int n, double payment) {	
