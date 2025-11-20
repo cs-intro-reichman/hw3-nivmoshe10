@@ -45,8 +45,9 @@ public class LoanCalc {
 
     double payment = loan / n;  
     double balance = endBalance(loan, rate, n, payment);
-
+		iterationCounter = 0;
     while (balance > 0) {
+		iterationCounter++;
         payment = payment + epsilon;
         balance = endBalance(loan, rate, n, payment);
     }
@@ -65,8 +66,9 @@ public class LoanCalc {
 
 	   double mid = (high + low) / 2.0;
 	   double balance = endBalance(loan , rate , n , mid);
-
+		iterationCounter = 0;
 	   while (Math.abs(balance) > epsilon) {
+		iterationCounter++;
 			if (balance > 0) {
 				low = mid;
 			}
