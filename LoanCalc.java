@@ -1,7 +1,7 @@
 // Computes the periodical payment necessary to pay a given loan.
 public class LoanCalc {
 	
-	static double epsilon = 0.01;  // Approximation accuracy
+	static double epsilon = 0.001;  // Approximation accuracy
 	static int iterationCounter;    // Number of iterations 
 	
 	// Gets the loan data and computes the periodical payment.
@@ -59,25 +59,26 @@ public class LoanCalc {
 	// Given: the sum of the loan, the periodical interest rate (as a percentage),
 	// the number of periods (n), and epsilon, the approximation's accuracy
 	// Side effect: modifies the class variable iterationCounter.
-    public static double bisectionSolver(double loan, double rate, int n, double epsilon) {  
-       double low = 0.0;
-	   double high = loan;
+    public static double bisectionSolver(double loan, double rate, int n, double epsilon) {    
+    double low = 0.0;
+    double high = loan;
 
-	   double mid = (high + low) / 2.0;
-	   double balance = endBalance(loan , rate , n , mid);
-		iterationCounter = 0;
-	   while (Math.abs(balance) > epsilon) {
-		iterationCounter++;
-			if (balance > 0) {
-				low = mid;
-			}
-			else {
-				high = mid;
-			}
-			mid = (low + high) / 2.0;
-			balance = endBalance(loan , rate , n , mid);
-	   }
+    iterationCounter = 0;
 
-		return mid;
+    while (high - low > epsilon) {
+        double mid = (low + high) / 2.0;
+        double balance = endBalance(loan, rate, n, mid);
+        iterationCounter++;
+
+        if (balance > 0) {
+            low = mid;
+
+        } else {
+            high = mid;
+        }
     }
-}
+
+    double mid = (low + high) / 2.0;
+    return mid;
+		}
+	}
